@@ -1,0 +1,10 @@
+
+
+odm(Object document Mapping) and orm( object relational mapping)
+
+
+ "_id": "68165d11354d806f555d4d35",
+  "__v": 0
+
+
+  _id  = timestamp+ etc
