@@ -1,0 +1,23 @@
+Authentication and Autherization
+
+user ko profile dene se pehle check karna hota hai ke user hai kaun
+
+
+
+cookies and session:
+server har baar bhul jata hai ki aap  kaun ho toh har baar wo appse puchega ki aap kaun ho 
+
+server browser ko cookie(unkown string) send kardega 
+
+fir wo cookie har request ke sath jata hai jisse userid-pass nhi dena padta server cookie se hi verify kar dega
+
+
+sabse pehle humein kuch cheejein seekhni hai alag alag 
+
+
+1) cookie kaise set kardega
+ii) bcryt kaise use karte hai for password encryption and decryption
+iii)jwt kya hai and jwt main data kaise store karein and baahar  nikalein
+
+
+
