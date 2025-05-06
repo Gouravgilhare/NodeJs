@@ -1,0 +1,19 @@
+Data storage: 
+Types of DBS - SQL | NoSQL
+
+SQL :- data ko ek roop main rakhna- koi table nhi hota hai bus usko row aur col mai show karte hai
+
+NoSQL :- mongoDB-> data store in form of object
+
+
+terminologies:- 
+    1. database cover under Backend 
+    2. Backend  = Application server +  Db server
+    3. Database ->collections -> Document -> 
+
+    code                         Database
+    --------------------------------------
+    mongoose.connect    ->      database create
+    model create        ->      collection
+    CREATE  code        ->      Document
+    
