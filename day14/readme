@@ -20,4 +20,8 @@ ii) bcryt kaise use karte hai for password encryption and decryption
 iii)jwt kya hai and jwt main data kaise store karein and baahar  nikalein
 
 
+jwt 3 hissso se banta hai
 
+1. Algorithm data
+2. data
+3. signatures data
