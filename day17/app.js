@@ -70,8 +70,42 @@ app.post('/post',  isLoggedIn, async (req,res)=>{
 app.get('/profile',  isLoggedIn, async (req,res)=>{
 
    let user =  await userModel.findOne({email : req.user.email}).populate("posts");
-    
-        res.render("profile",{user});
+    const userID = req.user.userid.toString();
+        res.render("profile",{user, userID});
+});
+
+app.get('/Edit/:id',  isLoggedIn, async (req,res)=>{
+
+   let post =  await postModel.findOne({_id : req.params.id}).populate("user");
+   
+   res.render("edit", {post});
+  
+
+        await post.save();
+        res.redirect('/profile');
+});
+app.post('/Update/:id',  isLoggedIn, async (req,res)=>{
+
+   let post =  await postModel.findOneAndUpdate({_id : req.params.id}, {content: req.body.content})
+   
+   res.redirect("/profile");
+  
+
+        await post.save();
+        res.redirect('/profile');
+});
+app.get('/Like/:id',  isLoggedIn, async (req,res)=>{
+
+   let post =  await postModel.findOne({_id : req.params.id}).populate("user");
+   
+  
+   if(post.Likes.indexOf(req.user.userid) === -1){
+        post.Likes.push(req.user.userid);
+    }else{
+        post.Likes.splice(post.Likes.indexOf(req.user.userid),1);
+    }
+        await post.save();
+        res.redirect('/profile');
 });
 
 app.get('/logout', async (req,res)=>{
