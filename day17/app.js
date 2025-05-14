@@ -5,31 +5,33 @@ const postModel = require("./models/post");
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const multer = require('multer');
+// const multer = require('multer');
+const upload= require('./config/multerconfig');
 const crypto = require('crypto');
 const path = require('path');
 
 
 app.set("view engine", "ejs");
 app.use(express.json());
+app.use(express.static(path.join(__dirname,"public")));
 app.use(express.urlencoded({extended : true}));
 app.use(cookieParser());
 
 
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/images/uploads');
-  },
-  filename: function (req, file, cb) {
-    crypto.randomBytes(12, (err,bytes)=>{
-        const fn = bytes.toString("hex") + path.extname(file.originalname);
-        cb(null, fn);
-    })    
-  }
-})
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './public/images/uploads');
+//   },
+//   filename: function (req, file, cb) {
+//     crypto.randomBytes(12, (err,bytes)=>{
+//         const fn = bytes.toString("hex") + path.extname(file.originalname);
+//         cb(null, fn);
+//     })    
+//   }
+// })
 
-const upload = multer({ storage: storage })
+// const upload = multer({ storage: storage })
 
 
 app.get('/', (req,res)=>{
@@ -43,16 +45,20 @@ app.get('/login',(req,res)=>{
 })
 
 
-app.get('/upload', (req,res)=>{
+app.get('/profile/upload', (req,res)=>{
 
-    res.render("test");
+    res.render("profileUpload");
 })
 
-app.post('/upload', upload.single("image"),(req,res)=>{
-  console.log("Form fields (req.body):", req.body);    // will be {} unless you add text inputs
-  console.log("Uploaded file (req.file):", req.file);  // this will have your file info
-  res.send("uploaded");
+app.post('/upload', isLoggedIn, upload.single("image"), async (req,res)=>{
+    let user = await userModel.findOne({email: req.user.email});
+    user.profilepic = req.file.filename;
+    console.log(req.file);
+    await user.save()
+    res.redirect("/profile");
 });
+
+
 
 
 
