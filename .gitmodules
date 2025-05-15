@@ -1,0 +1,3 @@
+[submodule "scatch_submodule"]
+	path = scatch_submodule
+	url = https://github.com/Gouravgilhare/Scatch-NodeJs.git
